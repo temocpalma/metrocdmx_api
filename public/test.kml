@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>Metro de la Ciudad de México</name>
+    <description>Mapa del Sistema de Transporte Colectivo | Red del Metro de la Ciudad de México. Cortesía de www.defe.mx</description>
+    <Folder>
+      <name>Líneas de Metro</name>
+      <Placemark>
+        <name>Línea 1</name>
+        <styleUrl>#line-EE9C96-10494-nodesc</styleUrl>
+        <LineString>
+          <tessellate>1</tessellate>
+          <coordinates>
+            -99.2005488,19.3982501,0
+            -99.187097,19.4031605,0
+          </coordinates>
+        </LineString>
+      </Placemark>
+      <Placemark>
+        <name>Línea 2</name>
+        <styleUrl>#line-EE9C96-10494-nodesc</styleUrl>
+        <LineString>
+          <tessellate>2</tessellate>
+          <coordinates>
+            -99.2005488,19.3982501,0
+            -99.187097,19.4031605,0
+          </coordinates>
+        </LineString>
+      </Placemark>
+    </Folder>
+  </Document>
+</kml>
