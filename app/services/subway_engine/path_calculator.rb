@@ -17,16 +17,18 @@ module SubwayEngine
       destination_lines = LinesByStationFinder.call(@subway_data, @destination)
       intersection_lines = source_lines & destination_lines
 
-      unless intersection_lines.empty?
-        [
-          {
-            line: intersection_lines.first,
-            source: @source,
-            destination: @destination,
-            direction: DirectionBetweenStationsInLine.call(@subway_data, intersection_lines.first, @source, @destination)
-          }
-        ]
-      end
+      return [ create_segment(intersection_lines.first, @source, @destination) ] unless intersection_lines.empty?
+
+
+    end
+
+    def create_segment(line, source, destination)
+      {
+        line: line,
+        source: source,
+        destination: destination,
+        direction: DirectionBetweenStationsInLine.call(@subway_data, line, source, destination)
+      }
     end
 
   end
