@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe SubwayDescriptor, type: :model do
   describe 'call' do
-    let(:data) { data = SubwayDescriptor.call }
+    let(:data) { SubwayDescriptor.call }
 
     it 'returns a not empty data' do
       expect(data).not_to be_empty
@@ -15,10 +15,11 @@ RSpec.describe SubwayDescriptor, type: :model do
 
     it 'returns 12 stations for line 2' do
       line2 = data.find do |line|
-        line[:name] == "Línea 2"
+        line[:name] == "LINEA 2"
       end
       expect(line2).not_to be_empty
       expect(line2[:stations].size).to eq(24)
+      expect(line2[:stations].first[:name]).to eq("CUATRO CAMINOS")
     end
   end
 end

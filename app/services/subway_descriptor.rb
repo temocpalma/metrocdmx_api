@@ -1,7 +1,9 @@
 require 'ox'
+require 'i18n'
 
 class SubwayDescriptor < ApplicationService
-  def initialize(data)
+  def initialize
+    I18n.available_locales = [:en]
   end
 
   def call
@@ -18,14 +20,14 @@ class SubwayDescriptor < ApplicationService
   def get_lines
     data = get_kml_hash
     data[:kml][:Document][:Folder].first[:Placemark].map do |line|
-      { name: line[:name], stations_coords: line[:LineString][:coordinates].strip.split(" ") }
+      { name: I18n.transliterate(line[:name].upcase), stations_coords: line[:LineString][:coordinates].strip.split(" ") }
     end
   end
 
   def get_stations
     data = get_kml_hash
     data[:kml][:Document][:Folder][1][:Placemark].map do |station|
-      { name: station[:name], coordinates: station[:Point][:coordinates].strip }
+      { name: I18n.transliterate(station[:name].upcase), coordinates: station[:Point][:coordinates].strip }
     end
   end
 
@@ -35,7 +37,7 @@ class SubwayDescriptor < ApplicationService
 
     lines.map do |line|
       line_stations = line[:stations_coords].map do |coord|
-        stations.filter do |station|
+        stations.find do |station|
           station[:coordinates] == coord
         end
       end
