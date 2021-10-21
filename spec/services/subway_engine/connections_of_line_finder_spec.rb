@@ -44,7 +44,7 @@ RSpec.describe SubwayEngine::ConnectionsOfLineFinder, type: :model do
       let(:result) { SubwayEngine::ConnectionsOfLineFinder.call(target_line.first, subway_data) }
 
       it 'returns connections lines = ["2", "3"]' do
-        expect(result).to eq([{:name=>"2", :station=>"C12"}, {:name=>"3", :station=>"L1S1"}])
+        expect(result).to eq([{:line=>"2", :station=>"C12"}, {:line=>"3", :station=>"L1S1"}])
       end
     end
 
@@ -53,7 +53,7 @@ RSpec.describe SubwayEngine::ConnectionsOfLineFinder, type: :model do
       let(:result) { SubwayEngine::ConnectionsOfLineFinder.call(target_line.first, subway_data) }
 
       it 'returns connections lines = ["1"]' do
-        expect(result).to eq([{:name=>"1", :station=>"C12"}])
+        expect(result).to eq([{:line=>"1", :station=>"C12"}])
       end
     end
 

@@ -25,13 +25,13 @@ module SubwayEngine
       )
 
       path_connections = intersection_lines.map do |inter|
-        connections_of_line.find { |conn| conn[:name] == inter }
+        connections_of_line.find { |conn| conn[:line] == inter }
       end
       get_path_connections(source_lines, destination_lines, index+=1, path_connections)
     end
 
     def connections_line_names(connections_line)
-      connections_line.map { |conn| conn[:name] }
+      connections_line.map { |conn| conn[:line] }
     end
 
   end

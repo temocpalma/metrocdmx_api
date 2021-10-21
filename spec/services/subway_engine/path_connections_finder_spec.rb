@@ -18,7 +18,7 @@ RSpec.describe SubwayEngine::PathConnectionsFinder, type: :model do
 
       it 'returns the details connection' do
         expect(result[:source_line]).to eq("LINEA 2")
-        expect(result[:connections].first).to eq({name: "LINEA 12", station: "ERMITA"})
+        expect(result[:connections].first).to eq({line: "LINEA 12", station: "ERMITA"})
       end
     end
 
@@ -50,7 +50,7 @@ RSpec.describe SubwayEngine::PathConnectionsFinder, type: :model do
 
       it 'returns the details connection' do
         expect(result[:source_line]).to eq("LINEA 2")
-        expect(result[:connections].first).to eq({name: "LINEA 9", station: "CHABACANO"})
+        expect(result[:connections].first).to eq({line: "LINEA 9", station: "CHABACANO"})
       end
     end
 
@@ -69,7 +69,7 @@ RSpec.describe SubwayEngine::PathConnectionsFinder, type: :model do
 
       it 'returns the details connection' do
         expect(result[:source_line]).to eq("LINEA 7")
-        expect(result[:connections].first).to eq({name: "LINEA 6", station: "EL ROSARIO"})
+        expect(result[:connections].first).to eq({line: "LINEA 6", station: "EL ROSARIO"})
       end
     end
 
@@ -101,7 +101,7 @@ RSpec.describe SubwayEngine::PathConnectionsFinder, type: :model do
 
       it 'returns the details connection' do
         expect(result[:source_line]).to eq("LINEA 2")
-        expect(result[:connections].first).to eq({name: "LINEA 9", station: "CHABACANO"})
+        expect(result[:connections].first).to eq({line: "LINEA 9", station: "CHABACANO"})
       end
     end
 
@@ -120,8 +120,8 @@ RSpec.describe SubwayEngine::PathConnectionsFinder, type: :model do
 
       it 'returns the details connection' do
         expect(result[:source_line]).to eq("LINEA 2")
-        expect(result[:connections].first).to eq({name: "LINEA 3", station: "HIDALGO"})
-        expect(result[:connections].last).to eq({name: "LINEA 9", station: "CHABACANO"})
+        expect(result[:connections].first).to eq({line: "LINEA 3", station: "HIDALGO"})
+        expect(result[:connections].last).to eq({line: "LINEA 9", station: "CHABACANO"})
       end
     end
 
@@ -140,7 +140,7 @@ RSpec.describe SubwayEngine::PathConnectionsFinder, type: :model do
 
       it 'returns the details connection' do
         expect(result[:source_line]).to eq("LINEA 3")
-        expect(result[:connections].first).to eq({name: "LINEA 6", station: "DEPORTIVO 18 DE MARZO"})
+        expect(result[:connections].first).to eq({line: "LINEA 6", station: "DEPORTIVO 18 DE MARZO"})
       end
     end
 
@@ -159,8 +159,8 @@ RSpec.describe SubwayEngine::PathConnectionsFinder, type: :model do
 
       it 'returns the details connection' do
         expect(result[:source_line]).to eq("LINEA 3")
-        expect(result[:connections].first).to eq({name: "LINEA 5", station: "LA RAZA"})
-        expect(result[:connections].last).to eq({name: "LINEA 6", station: "DEPORTIVO 18 DE MARZO"})
+        expect(result[:connections].first).to eq({line: "LINEA 5", station: "LA RAZA"})
+        expect(result[:connections].last).to eq({line: "LINEA 6", station: "DEPORTIVO 18 DE MARZO"})
       end
     end
 
