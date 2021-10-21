@@ -13,7 +13,9 @@ module SubwayEngine
     private
 
     def get_path_connections(source_lines, destination_lines, index, path_connections)
-      return path_connections if (not path_connections.empty?) or (index > source_lines.size - 1)
+      return {source_line: source_lines[index - 1], connections: path_connections} unless path_connections.empty?
+      return {} unless index < source_lines.size
+
       line = @subway_data.find { |line| line[:name] == source_lines[index] }
       connections_of_line = ConnectionsOfLineFinder.call(line, @subway_data)
       connection_names = connections_line_names(connections_of_line)

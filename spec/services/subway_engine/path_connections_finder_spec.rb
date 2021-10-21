@@ -13,11 +13,12 @@ RSpec.describe SubwayEngine::PathConnectionsFinder, type: :model do
       end
 
       it 'returns the path connections with one element only' do
-        expect(result.size).to eq(1)
+        expect(result[:connections].size).to eq(1)
       end
 
       it 'returns the details connection' do
-        expect(result.first).to eq({name: "LINEA 12", station: "ERMITA"})
+        expect(result[:source_line]).to eq("LINEA 2")
+        expect(result[:connections].first).to eq({name: "LINEA 12", station: "ERMITA"})
       end
     end
 
@@ -44,11 +45,12 @@ RSpec.describe SubwayEngine::PathConnectionsFinder, type: :model do
       end
 
       it 'returns the path connections with one element only' do
-        expect(result.size).to eq(1)
+        expect(result[:connections].size).to eq(1)
       end
 
       it 'returns the details connection' do
-        expect(result.first).to eq({name: "LINEA 9", station: "CHABACANO"})
+        expect(result[:source_line]).to eq("LINEA 2")
+        expect(result[:connections].first).to eq({name: "LINEA 9", station: "CHABACANO"})
       end
     end
 
@@ -62,11 +64,12 @@ RSpec.describe SubwayEngine::PathConnectionsFinder, type: :model do
       end
 
       it 'returns the path connections with one element only' do
-        expect(result.size).to eq(1)
+        expect(result[:connections].size).to eq(1)
       end
 
       it 'returns the details connection' do
-        expect(result.first).to eq({name: "LINEA 6", station: "EL ROSARIO"})
+        expect(result[:source_line]).to eq("LINEA 7")
+        expect(result[:connections].first).to eq({name: "LINEA 6", station: "EL ROSARIO"})
       end
     end
 
@@ -93,11 +96,12 @@ RSpec.describe SubwayEngine::PathConnectionsFinder, type: :model do
       end
 
       it 'returns the path connections with one element only' do
-        expect(result.size).to eq(1)
+        expect(result[:connections].size).to eq(1)
       end
 
       it 'returns the details connection' do
-        expect(result.first).to eq({name: "LINEA 9", station: "CHABACANO"})
+        expect(result[:source_line]).to eq("LINEA 2")
+        expect(result[:connections].first).to eq({name: "LINEA 9", station: "CHABACANO"})
       end
     end
 
@@ -111,12 +115,13 @@ RSpec.describe SubwayEngine::PathConnectionsFinder, type: :model do
       end
 
       it 'returns the path connections with one element only' do
-        expect(result.size).to eq(2)
+        expect(result[:connections].size).to eq(2)
       end
 
       it 'returns the details connection' do
-        expect(result.first).to eq({name: "LINEA 3", station: "HIDALGO"})
-        expect(result.last).to eq({name: "LINEA 9", station: "CHABACANO"})
+        expect(result[:source_line]).to eq("LINEA 2")
+        expect(result[:connections].first).to eq({name: "LINEA 3", station: "HIDALGO"})
+        expect(result[:connections].last).to eq({name: "LINEA 9", station: "CHABACANO"})
       end
     end
 
@@ -130,11 +135,12 @@ RSpec.describe SubwayEngine::PathConnectionsFinder, type: :model do
       end
 
       it 'returns the path connections with one element only' do
-        expect(result.size).to eq(1)
+        expect(result[:connections].size).to eq(1)
       end
 
       it 'returns the details connection' do
-        expect(result.first).to eq({name: "LINEA 6", station: "DEPORTIVO 18 DE MARZO"})
+        expect(result[:source_line]).to eq("LINEA 3")
+        expect(result[:connections].first).to eq({name: "LINEA 6", station: "DEPORTIVO 18 DE MARZO"})
       end
     end
 
@@ -148,12 +154,13 @@ RSpec.describe SubwayEngine::PathConnectionsFinder, type: :model do
       end
 
       it 'returns the path connections with one element only' do
-        expect(result.size).to eq(2)
+        expect(result[:connections].size).to eq(2)
       end
 
       it 'returns the details connection' do
-        expect(result.first).to eq({name: "LINEA 5", station: "LA RAZA"})
-        expect(result.last).to eq({name: "LINEA 6", station: "DEPORTIVO 18 DE MARZO"})
+        expect(result[:source_line]).to eq("LINEA 3")
+        expect(result[:connections].first).to eq({name: "LINEA 5", station: "LA RAZA"})
+        expect(result[:connections].last).to eq({name: "LINEA 6", station: "DEPORTIVO 18 DE MARZO"})
       end
     end
 
