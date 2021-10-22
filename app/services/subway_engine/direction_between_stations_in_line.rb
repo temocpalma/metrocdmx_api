@@ -13,26 +13,29 @@ module SubwayEngine
 
     private
 
-    def target_line
-      @subway_data.select do |line|
+    def get_target_line
+      @subway_data.find do |line|
         line[:name] == @line
       end
     end
 
-    def station_pos(target_line, target_station)
-      stations_names = target_line.first[:stations].map do |station|
+    def get_station_pos(target_line, target_station)
+      stations_names = target_line[:stations].map do |station|
         station[:name]
       end
       stations_names.find_index(target_station)
     end
 
     def direction
-      line = target_line
-      source_pos = station_pos(line, @source)
-      destination_pos = station_pos(line, @destination)
+      line = get_target_line
+      source_pos = get_station_pos(line, @source)
+      destination_pos = get_station_pos(line, @destination)
+
+      return "#{@source} does not exists in #{@line}" if source_pos.nil?
+      return "#{@destination} does not exists in #{@line}" if destination_pos.nil?
       return "Source and Destination is the same" if source_pos == destination_pos
-      return line.first[:stations].last[:name] if source_pos < destination_pos
-      line.first[:stations].first[:name] if source_pos > destination_pos
+      return line[:stations].last[:name] if source_pos < destination_pos
+      line[:stations].first[:name] if source_pos > destination_pos
     end
 
   end

@@ -1,69 +1,46 @@
 require 'rails_helper'
 
 RSpec.describe SubwayEngine::DirectionBetweenStationsInLine, type: :model do
-  let(:subway_data) { [
-    {
-      :name=>"1",
-      :stations=>[
-        {:name=>"L1S1", :coordinates=>"lat,lon"},
-        {:name=>"C12", :coordinates=>"lat,lon"}
-      ]
-    },
-    {
-      :name=>"2",
-      :stations=>[
-        {:name=>"L2S1", :coordinates=>"lat,lon"},
-        {:name=>"L2S2", :coordinates=>"lat,lon"},
-        {:name=>"C12", :coordinates=>"lat,lon"}
-      ]
-    },
-    {
-      :name=>"3",
-      :stations=>[
-        {:name=>"L3S1", :coordinates=>"lat,lon"}
-      ]
-    },
-    {
-      :name=>"X",
-      :stations=>[
-        {:name=>"A", :coordinates=>"1"},
-        {:name=>"B", :coordinates=>"2"},
-        {:name=>"C", :coordinates=>"3"},
-        {:name=>"D", :coordinates=>"4"},
-        {:name=>"E", :coordinates=>"5"}
-      ]
-    }
-  ] }
-
-let(:target_line) { "X" }
-
-let(:result) { SubwayEngine::DirectionBetweenStationsInLine.call(subway_data, target_line, source, destination) }
-
+  let(:subway_data) { SubwayDescriptor.call }
   describe 'call' do
-    context 'when source is first than destination in the stations list' do
-      let(:source) { "B" }
-      let(:destination) { "D" }
-      it 'returns the direction equals to E' do
+    let(:target_line) { "LINEA 2" }
+    let(:result) { SubwayEngine::DirectionBetweenStationsInLine.call(subway_data, target_line, source, destination) }
+    context 'when lines existing in line case direction 1' do
+      let(:source) { "PORTALES" }
+      let(:destination) { "XOLA" }
+
+      it 'returns the direction equals to CUATRO CAMINOS' do
         expect(result).not_to be_nil
-        expect(result).to eq("E")
+        expect(result).to eq("CUATRO CAMINOS")
       end
     end
 
-    context 'when source is after than destination in the stations list' do
-      let(:source) { "D" }
-      let(:destination) { "B" }
-      it 'returns the direction equals to A' do
+    context 'when lines existing in line case direction inverse to 1' do
+      let(:source) { "XOLA" }
+      let(:destination) { "PORTALES" }
+
+      it 'returns the direction equals to TASQUENA' do
         expect(result).not_to be_nil
-        expect(result).to eq("A")
+        expect(result).to eq("TASQUENA")
       end
     end
 
     context 'when source and destination is the same' do
-      let(:source) { "B" }
-      let(:destination) { "B" }
-      it 'returns the direction equals to A' do
+      let(:source) { "PORTALES" }
+      let(:destination) { "PORTALES" }
+
+      it 'returns a descriptive message' do
         expect(result).not_to be_nil
         expect(result).to eq("Source and Destination is the same")
+      end
+    end
+
+    context 'when source does not exists in line' do
+      let(:source) { "COYOACAN" }
+      let(:destination) { "PORTALES" }
+
+      it 'returns a descriptive message' do
+        expect(result).to eq("COYOACAN does not exists in LINEA 2")
       end
     end
   end
