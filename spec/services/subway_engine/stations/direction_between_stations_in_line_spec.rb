@@ -1,10 +1,14 @@
 require 'rails_helper'
+RSpec.configure do |config|
+  config.before(:all) do
+    @subway_data = SubwayDescriptor.call
+  end
+end
 
-RSpec.describe SubwayEngine::DirectionBetweenStationsInLine, type: :model do
-  let(:subway_data) { SubwayDescriptor.call }
+RSpec.describe SubwayEngine::Stations::DirectionBetweenStationsInLine, type: :model do
   describe 'call' do
     let(:target_line) { "LINEA 2" }
-    let(:result) { SubwayEngine::DirectionBetweenStationsInLine.call(subway_data, target_line, source, destination) }
+    let(:result) { SubwayEngine::Stations::DirectionBetweenStationsInLine.call(@subway_data, target_line, source, destination) }
     context 'when lines existing in line case direction 1' do
       let(:source) { "PORTALES" }
       let(:destination) { "XOLA" }

@@ -1,4 +1,4 @@
-module SubwayEngine
+module SubwayEngine::Stations
   class DirectionBetweenStationsInLine < ApplicationService
     def initialize(subway_data, line, source, destination)
       @subway_data = subway_data
@@ -14,9 +14,9 @@ module SubwayEngine
     private
 
     def direction
-      line = Lines::LineByNameFinder.call(@subway_data, @line)
-      source_pos = Stations::StationPositionInLineFinder.call(line, @source)
-      destination_pos = Stations::StationPositionInLineFinder.call(line, @destination)
+      line = SubwayEngine::Lines::LineByNameFinder.call(@subway_data, @line)
+      source_pos = StationPositionInLineFinder.call(line, @source)
+      destination_pos = StationPositionInLineFinder.call(line, @destination)
 
       return "#{@source} does not exists in #{@line}" if source_pos.nil?
       return "#{@destination} does not exists in #{@line}" if destination_pos.nil?
