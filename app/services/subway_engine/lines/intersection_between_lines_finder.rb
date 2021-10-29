@@ -1,4 +1,4 @@
-module SubwayEngine
+module SubwayEngine::Lines
   class IntersectionBetweenLinesFinder < ApplicationService
     def initialize(source_lines, destination_lines)
       @source_lines = source_lines
