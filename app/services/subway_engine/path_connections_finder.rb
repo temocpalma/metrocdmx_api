@@ -18,9 +18,9 @@ module SubwayEngine
       return {} unless index < @source_lines.size
 
       line = @subway_data.find { |line| line[:name] == @source_lines[index] }
-      connections_of_line = ConnectionsOfLineFinder.call(line, @subway_data)
+      connections_of_line = Lines::ConnectionsOfLineFinder.call(line, @subway_data)
       connection_names = connections_line_names(connections_of_line)
-      intersection_lines = IntersectionBetweenLinesFinder.call(
+      intersection_lines = Lines::IntersectionBetweenLinesFinder.call(
         connection_names,
         @destination_lines
       )

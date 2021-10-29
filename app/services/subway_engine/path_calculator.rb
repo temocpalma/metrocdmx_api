@@ -13,26 +13,17 @@ module SubwayEngine
     private
 
     def compute_path
-      source_lines = LinesByStationFinder.call(@subway_data, @source)
-      destination_lines = LinesByStationFinder.call(@subway_data, @destination)
+      source_lines = Lines::LinesByStationFinder.call(@subway_data, @source)
+      destination_lines = Lines::LinesByStationFinder.call(@subway_data, @destination)
       intersection_lines = source_lines & destination_lines
 
       # Path are in same line
-      return [ create_segment(intersection_lines.first, @source, @destination) ] unless intersection_lines.empty?
+      return [ SegmentCreator.call(@subway_data, intersection_lines.first, @source, @destination) ] unless intersection_lines.empty?
       # Path are in distinct lines
       result = stations_in_distinct_lines(source_lines, destination_lines)
       # puts "Result path: #{result}"
       result
 
-    end
-
-    def create_segment(line, source, destination)
-      {
-        line: line,
-        source: source,
-        destination: destination,
-        direction: DirectionBetweenStationsInLine.call(@subway_data, line, source, destination)
-      }
     end
 
     def stations_in_distinct_lines(source_lines, destination_lines)
@@ -47,7 +38,7 @@ module SubwayEngine
 
     def stations_connected_through_a_third_line(source_lines, destination_lines)
       line = @subway_data.find { |line| line[:name] == source_lines.first }
-      connections_of_source_line = ConnectionsOfLineFinder.call(line, @subway_data)
+      connections_of_source_line = Lines::ConnectionsOfLineFinder.call(line, @subway_data)
       connections_of_source_line_names = connections_of_source_line.map { |conn| conn[:line] }
       path_connections = PathConnectionsFinder.call(@subway_data, @destination, destination_lines, connections_of_source_line_names)
       if !path_connections.empty?
