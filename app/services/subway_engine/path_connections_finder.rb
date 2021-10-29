@@ -37,8 +37,7 @@ module SubwayEngine
     end
 
     def select_nearest_connection(path_connections, line)
-      return path_connections if path_connections.size < 2
-
+      return path_connections if path_connections.empty?
       path_connections_with_count_stations = path_connections.map do |conn|
         conn[:count_stations] = Stations::CountBetweenStationsCalculator.call(line, @source, conn[:station])
         conn
