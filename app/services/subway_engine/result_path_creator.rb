@@ -9,10 +9,10 @@ module SubwayEngine
 
     def call
       result_path = []
-
       # First segment
       line = @path_connections[:source_line]
       destination = @path_connections[:connections].first[:station]
+      count_stations = @path_connections[:connections].first[:count_stations]
       start_segment = create_segment(line, @source, destination)
       result_path << start_segment
 
@@ -27,11 +27,13 @@ module SubwayEngine
     private
 
     def create_segment(line, source, destination)
+      line_data = Lines::LineByNameFinder.call(@subway_data, line)
       {
         line: line,
         source: source,
         destination: destination,
-        direction: DirectionBetweenStationsInLine.call(@subway_data, line, source, destination)
+        direction: DirectionBetweenStationsInLine.call(@subway_data, line, source, destination),
+        count_stations: Stations::CountBetweenStationsCalculator.call(line_data, source, destination)
       }
     end
 
