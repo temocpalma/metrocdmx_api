@@ -1,4 +1,4 @@
-module SubwayEngine
+module SubwayEngine::Stations
   class StationIsInLineValidator < ApplicationService
     def initialize(target_station, line)
       @target_station = target_station

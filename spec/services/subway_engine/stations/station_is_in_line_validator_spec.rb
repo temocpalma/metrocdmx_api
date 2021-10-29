@@ -1,9 +1,9 @@
 require 'rails_helper'
 
-RSpec.describe SubwayEngine::StationIsInLineValidator, type: :model do
+RSpec.describe SubwayEngine::Stations::StationIsInLineValidator, type: :model do
   describe 'call' do
-    let(:line) {
-      {
+    before(:all) do
+      @line = {
         :name=>"X",
         :stations=>[
           {:name=>"A", :coordinates=>"1"},
@@ -13,11 +13,11 @@ RSpec.describe SubwayEngine::StationIsInLineValidator, type: :model do
           {:name=>"E", :coordinates=>"5"}
         ]
       }
-    }
+    end
 
     context 'when station is included in line' do
       let(:target_station) { "C" }
-      let (:result) { SubwayEngine::StationIsInLineValidator.call(target_station, line) }
+      let (:result) { SubwayEngine::Stations::StationIsInLineValidator.call(target_station, @line) }
       it 'returns true' do
         expect(result).to be true
       end
@@ -25,7 +25,7 @@ RSpec.describe SubwayEngine::StationIsInLineValidator, type: :model do
 
     context 'when station is not included in line' do
       let(:target_station) { "M" }
-      let (:result) { SubwayEngine::StationIsInLineValidator.call(target_station, line) }
+      let (:result) { SubwayEngine::Stations::StationIsInLineValidator.call(target_station, @line) }
       it 'returns false' do
         expect(result).to be false
       end

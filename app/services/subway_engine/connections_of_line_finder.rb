@@ -10,7 +10,7 @@ module SubwayEngine
       connections_lines = []
       @target_line[:stations].each do |station|
         searching_lines.each do |line|
-          connections_lines << {line: line[:name], station: station[:name]} if SubwayEngine::StationIsInLineValidator.call(station[:name], line)
+          connections_lines << {line: line[:name], station: station[:name]} if Stations::StationIsInLineValidator.call(station[:name], line)
         end
       end
       connections_lines.sort { |l1, l2| l1[:line] <=> l2[:line] }
