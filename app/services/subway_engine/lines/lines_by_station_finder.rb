@@ -1,4 +1,4 @@
-module SubwayEngine
+module SubwayEngine::Lines
   class LinesByStationFinder < ApplicationService
 
     def initialize(subway_data, station)
