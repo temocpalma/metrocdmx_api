@@ -85,7 +85,7 @@ RSpec.describe SubwayEngine::Lines::ConnectionsBetweenLinesFinder, type: :model 
       end
 
       it 'should returns intersections' do
-        expect(@result[:intersections]).to eq(["LINEA 12"])
+        expect(@result[:intersections]).to eq([{line: "LINEA 12", station: "ERMITA"}])
       end
     end
 
@@ -104,7 +104,7 @@ RSpec.describe SubwayEngine::Lines::ConnectionsBetweenLinesFinder, type: :model 
       end
 
       it 'should returns intersections' do
-        expect(@result[:intersections]).to eq(["LINEA 2", "LINEA 8"])
+        expect(@result[:intersections]).to eq([{line: "LINEA 2", station: "ERMITA"}, {line: "LINEA 8", station: "ATLALILCO"}])
       end
     end
 
@@ -123,7 +123,7 @@ RSpec.describe SubwayEngine::Lines::ConnectionsBetweenLinesFinder, type: :model 
       end
 
       it 'should returns intersections' do
-        expect(@result[:intersections]).to eq(["LINEA 12"])
+        expect(@result[:intersections]).to eq([{line: "LINEA 12", station: "MIXCOAC"}])
       end
     end
 
@@ -142,7 +142,7 @@ RSpec.describe SubwayEngine::Lines::ConnectionsBetweenLinesFinder, type: :model 
       end
 
       it 'should returns intersections' do
-        expect(@result[:intersections]).to eq(["LINEA 8"])
+        expect(@result[:intersections]).to eq([{line: "LINEA 8", station: "SALTO DEL AGUA"}])
       end
     end
   end
@@ -163,7 +163,7 @@ RSpec.describe SubwayEngine::Lines::ConnectionsBetweenLinesFinder, type: :model 
       end
 
       it 'should returns intersections' do
-        expect(@result[:intersections]).to eq(["LINEA 1"])
+        expect(@result[:intersections]).to eq([{line: "LINEA 1", station: "SAN LAZARO"}])
       end
     end
 
@@ -182,7 +182,7 @@ RSpec.describe SubwayEngine::Lines::ConnectionsBetweenLinesFinder, type: :model 
       end
 
       it 'should returns intersections' do
-        expect(@result[:intersections]).to eq(["LINEA 4"])
+        expect(@result[:intersections]).to eq([{line: "LINEA 4", station: "MARTIN CARRERA"}])
       end
     end
 
@@ -201,7 +201,7 @@ RSpec.describe SubwayEngine::Lines::ConnectionsBetweenLinesFinder, type: :model 
       end
 
       it 'should returns intersections' do
-        expect(@result[:intersections]).to eq(["LINEA 3"])
+        expect(@result[:intersections]).to eq([{line: "LINEA 3", station: "LA RAZA"}])
       end
     end
 
@@ -220,7 +220,7 @@ RSpec.describe SubwayEngine::Lines::ConnectionsBetweenLinesFinder, type: :model 
       end
 
       it 'should returns intersections' do
-        expect(@result[:intersections]).to eq(["LINEA 1", "LINEA 3", "LINEA 9"])
+        expect(@result[:intersections]).to eq([{line: "LINEA 1", station: "PANTITLAN"}, {line: "LINEA 3", station: "LA RAZA"}, {line: "LINEA 9", station: "PANTITLAN"}])
       end
     end
   end

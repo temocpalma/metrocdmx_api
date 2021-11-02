@@ -64,8 +64,14 @@ module SubwayEngine::Lines
         intersections = connections_names & destination_lines
         puts "Intersections: #{intersections}"
 
+        full_intersections = intersections.map do |line|
+          connections_source_line.find { |conn| conn[:line] == line }
+        end
+
+        puts "Full intersections: #{full_intersections}"
+
         result = intersections.empty? ? {case: DIRECT_INTERSECT, source_index: source_index + 1}
-          : {source_line: source_line, intersections: intersections, destination_line: intersections, case: "DONE", source_index: source_index}
+          : {source_line: source_line, intersections: full_intersections, destination_line: intersections, case: "DONE", source_index: source_index}
       else
         puts "else direct intersect source index: #{source_index}"
         result = {case: THIRD_INTERSECT, source_index: 0}
@@ -107,8 +113,14 @@ module SubwayEngine::Lines
           intersections = connections_source_names & connections_destination_names
           puts "Intersections: #{intersections}"
 
+          full_intersections = intersections.map do |line|
+            connections_source_line.find { |conn| conn[:line] == line }
+          end
+
+          puts "Full intersections: #{full_intersections}"
+
           result = intersections.empty? ? {case: THIRD_INTERSECT, source_index: source_index, destination_index: destination_index + 1}
-            : {source_line: source_line, intersections: intersections, destination_line: destination_line, case: "DONE", source_index: source_index, destination_index: destination_index}
+            : {source_line: source_line, intersections: full_intersections, destination_line: destination_line, case: "DONE", source_index: source_index, destination_index: destination_index}
         end
       else
         result = {case: THIRD_INTERSECT, source_index: source_index + 1, destination_index: 0}
