@@ -622,6 +622,7 @@
         <LineString>
           <tessellate>1</tessellate>
           <coordinates>
+            -99.152836,19.446447
             -99.1453725,19.4451408,0
             -99.1392624,19.4427583,0
             -99.1313499,19.4433754,0
@@ -854,6 +855,16 @@
         <Point>
           <coordinates>
             -99.0960038,19.4197101,0
+          </coordinates>
+        </Point>
+      </Placemark>
+      <Placemark>
+        <name>Buenavista</name>
+        <description>Línea B. Eje 1 Norte, 259, 06350, Buenavista, Cuauhtémoc, Ciudad de México, DF, México</description>
+        <styleUrl>#icon-1445</styleUrl>
+        <Point>
+          <coordinates>
+            -99.152836,19.446447
           </coordinates>
         </Point>
       </Placemark>
