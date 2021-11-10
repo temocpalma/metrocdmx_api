@@ -42,7 +42,6 @@ module SubwayEngine
       else
         result_path << {error: "PATH NOT FOUND"}
       end
-      puts "Result path: #{result_path}"
       result_path
     end
   end

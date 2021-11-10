@@ -475,5 +475,242 @@ RSpec.describe SubwayEngine::ResultPathCreator, type: :model do
         expect(@result_path.last[:count_stations]).to eq(6)
       end
     end
+
+    context 'source is not connection station and destination is connection station' do
+      before(:all) do
+        @source = "LINDAVISTA"
+        @destination = "ATLALILCO"
+        @connections = {
+          source_line: "LINEA 6",
+          intersections: {:source=>[{:line=>"LINEA 4", :station=>"MARTIN CARRERA"}], :destination=>[{:line=>"LINEA 4", :station=>"SANTA ANITA"}]},
+          destination_line: "LINEA 8",
+          connection_type: THIRD_INTERSECT
+        }
+        @result_path = SubwayEngine::ResultPathCreator.call(@subway_data, @source, @destination, @connections)
+      end
+
+      it 'returns result path with one segment only' do
+        expect(@result_path.size).to eq(3)
+      end
+
+      it "returns the first segment line is source line in connections" do
+        expect(@result_path.first[:line]).to eq(@connections[:source_line])
+      end
+
+      it "returns the first segment source is #{@source}" do
+        expect(@result_path.first[:source]).to eq(@source)
+      end
+
+      it "returns the first segment destination is MARTIN CARRERA" do
+        expect(@result_path.first[:destination]).to eq("MARTIN CARRERA")
+      end
+
+      it "returns the first segment direction is MARTIN CARRERA" do
+        expect(@result_path.first[:direction]).to eq("MARTIN CARRERA")
+      end
+
+      it "returns the first segment count stations is 3" do
+        expect(@result_path.first[:count_stations]).to eq(3)
+      end
+
+      it "returns the second segment line is LINEA 4" do
+        expect(@result_path[1][:line]).to eq("LINEA 4")
+      end
+
+      it "returns the second segment source is MARTIN CARRERA" do
+        expect(@result_path[1][:source]).to eq("MARTIN CARRERA")
+      end
+
+      it "returns the second segment destination is SANTA ANITA" do
+        expect(@result_path[1][:destination]).to eq("SANTA ANITA")
+      end
+
+      it "returns the second segment direction is SANTA ANITA" do
+        expect(@result_path[1][:direction]).to eq("SANTA ANITA")
+      end
+
+      it "returns the second segment count stations is 9" do
+        expect(@result_path[1][:count_stations]).to eq(9)
+      end
+
+      it "returns the last segment line is source line in connections" do
+        expect(@result_path.last[:line]).to eq(@connections[:destination_line])
+      end
+
+      it "returns the last segment source is SANTA ANITA" do
+        expect(@result_path.last[:source]).to eq("SANTA ANITA")
+      end
+
+      it "returns the last segment destination is #{@destination}" do
+        expect(@result_path.last[:destination]).to eq(@destination)
+      end
+
+      it "returns the last segment direction is CONSTITUCION DE 1917" do
+        expect(@result_path.last[:direction]).to eq("CONSTITUCION DE 1917")
+      end
+
+      it "returns the last segment count stations is 6" do
+        expect(@result_path.last[:count_stations]).to eq(6)
+      end
+    end
+
+    context 'source is connection station and destination is not connection station' do
+      before(:all) do
+        @source = "OCEANIA"
+        @destination = "CULHUACAN"
+        @connections = {
+          source_line: "LINEA 5",
+          intersections: {:source=>[{:line=>"LINEA 3", :station=>"LA RAZA"}], :destination=>[{:line=>"LINEA 3", :station=>"ZAPATA"}]},
+          destination_line: "LINEA 12",
+          connection_type: THIRD_INTERSECT
+        }
+        @result_path = SubwayEngine::ResultPathCreator.call(@subway_data, @source, @destination, @connections)
+      end
+
+      it 'returns result path with one segment only' do
+        expect(@result_path.size).to eq(3)
+      end
+
+      it "returns the first segment line is source line in connections" do
+        expect(@result_path.first[:line]).to eq(@connections[:source_line])
+      end
+
+      it "returns the first segment source is #{@source}" do
+        expect(@result_path.first[:source]).to eq(@source)
+      end
+
+      it "returns the first segment destination is LA RAZA" do
+        expect(@result_path.first[:destination]).to eq("LA RAZA")
+      end
+
+      it "returns the first segment direction is POLITECNICO" do
+        expect(@result_path.first[:direction]).to eq("POLITECNICO")
+      end
+
+      it "returns the first segment count stations is 6" do
+        expect(@result_path.first[:count_stations]).to eq(6)
+      end
+
+      it "returns the second segment line is LINEA 3" do
+        expect(@result_path[1][:line]).to eq("LINEA 3")
+      end
+
+      it "returns the second segment source is LA RAZA" do
+        expect(@result_path[1][:source]).to eq("LA RAZA")
+      end
+
+      it "returns the second segment destination is ZAPATA" do
+        expect(@result_path[1][:destination]).to eq("ZAPATA")
+      end
+
+      it "returns the second segment direction is UNIVERSIDAD" do
+        expect(@result_path[1][:direction]).to eq("UNIVERSIDAD")
+      end
+
+      it "returns the second segment count stations is 12" do
+        expect(@result_path[1][:count_stations]).to eq(12)
+      end
+
+      it "returns the last segment line is source line in connections" do
+        expect(@result_path.last[:line]).to eq(@connections[:destination_line])
+      end
+
+      it "returns the last segment source is ZAPATA" do
+        expect(@result_path.last[:source]).to eq("ZAPATA")
+      end
+
+      it "returns the last segment destination is #{@destination}" do
+        expect(@result_path.last[:destination]).to eq(@destination)
+      end
+
+      it "returns the last segment direction is TLAHUAC" do
+        expect(@result_path.last[:direction]).to eq("TLAHUAC")
+      end
+
+      it "returns the last segment count stations is 6" do
+        expect(@result_path.last[:count_stations]).to eq(6)
+      end
+    end
+
+    context 'source and destination are connection stations' do
+      before(:all) do
+        @source = "OCEANIA"
+        @destination = "TACUBA"
+        @connections = {
+          source_line: "LINEA 5",
+          intersections: {
+            :source=>[{line: "LINEA 1", station: "PANTITLAN"}, {line: "LINEA 3", station: "LA RAZA"}, {line: "LINEA 9", station: "PANTITLAN"}],
+            :destination=>[{line: "LINEA 1", station: "PINO SUAREZ"}, {line: "LINEA 3", station: "HIDALGO"}, {line: "LINEA 9", station: "CHABACANO"}]
+          },
+          destination_line: "LINEA 2",
+          connection_type: THIRD_INTERSECT
+        }
+        @result_path = SubwayEngine::ResultPathCreator.call(@subway_data, @source, @destination, @connections)
+      end
+
+      it 'returns result path with one segment only' do
+        expect(@result_path.size).to eq(3)
+      end
+
+      it "returns the first segment line is source line in connections" do
+        expect(@result_path.first[:line]).to eq(@connections[:source_line])
+      end
+
+      it "returns the first segment source is #{@source}" do
+        expect(@result_path.first[:source]).to eq(@source)
+      end
+
+      it "returns the first segment destination is PANTITLAN" do
+        expect(@result_path.first[:destination]).to eq("PANTITLAN")
+      end
+
+      it "returns the first segment direction is PANTITLAN" do
+        expect(@result_path.first[:direction]).to eq("PANTITLAN")
+      end
+
+      it "returns the first segment count stations is 3" do
+        expect(@result_path.first[:count_stations]).to eq(3)
+      end
+
+      it "returns the second segment line is LINEA 1" do
+        expect(@result_path[1][:line]).to eq("LINEA 1")
+      end
+
+      it "returns the second segment source is PANTITLAN" do
+        expect(@result_path[1][:source]).to eq("PANTITLAN")
+      end
+
+      it "returns the second segment destination is PINO SUAREZ" do
+        expect(@result_path[1][:destination]).to eq("PINO SUAREZ")
+      end
+
+      it "returns the second segment direction is OBSERVATORIO" do
+        expect(@result_path[1][:direction]).to eq("OBSERVATORIO")
+      end
+
+      it "returns the second segment count stations is 9" do
+        expect(@result_path[1][:count_stations]).to eq(9)
+      end
+
+      it "returns the last segment line is source line in connections" do
+        expect(@result_path.last[:line]).to eq(@connections[:destination_line])
+      end
+
+      it "returns the last segment source is PINO SUAREZ" do
+        expect(@result_path.last[:source]).to eq("PINO SUAREZ")
+      end
+
+      it "returns the last segment destination is #{@destination}" do
+        expect(@result_path.last[:destination]).to eq(@destination)
+      end
+
+      it "returns the last segment direction is CUATRO CAMINOS" do
+        expect(@result_path.last[:direction]).to eq("CUATRO CAMINOS")
+      end
+
+      it "returns the last segment count stations is 11" do
+        expect(@result_path.last[:count_stations]).to eq(11)
+      end
+    end
   end
 end
